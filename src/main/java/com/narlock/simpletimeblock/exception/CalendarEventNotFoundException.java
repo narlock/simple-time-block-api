@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class CalendarEventNotFoundException extends RuntimeException {
-    private Integer calendarEventId;
+  private Integer calendarEventId;
 
-    public CalendarEventNotFoundException(Integer calendarEventId, String message) {
-        super(message);
-        this.calendarEventId = calendarEventId;
-    }
+  public CalendarEventNotFoundException(Integer calendarEventId, String message) {
+    super(message);
+    this.calendarEventId = calendarEventId;
+  }
 }

@@ -7,6 +7,8 @@ import java.time.LocalTime
 
 class TestUtil {
     public static final Integer ID = 1
+    public static final String VALID_DATE_STRING = '2024-02-17'
+    public static final LocalDate VALID_DATE_LOCAL = LocalDate.of(2024, 2, 17)
     public static final CalendarEvent CALENDAR_EVENT = new CalendarEvent(
             id: 1,
             name: 'Sample Event',

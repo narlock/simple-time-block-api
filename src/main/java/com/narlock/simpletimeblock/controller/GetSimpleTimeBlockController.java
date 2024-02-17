@@ -2,12 +2,12 @@ package com.narlock.simpletimeblock.controller;
 
 import com.narlock.simpletimeblock.model.CalendarEvent;
 import com.narlock.simpletimeblock.service.SimpleTimeBlockService;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -15,16 +15,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class GetSimpleTimeBlockController {
 
-    private final SimpleTimeBlockService simpleTimeBlockService;
+  private final SimpleTimeBlockService simpleTimeBlockService;
 
-    /**
-     * Retrieve a time-blocked event
-     * @param id
-     * @return CalenarEvent associated to the id parameter
-     */
-    @GetMapping("/{id}")
-    public CalendarEvent getCalendarEventById(@PathVariable("id") Integer id) {
-        log.info("Received request to retrieve calendar event with id {}", id);
-        return simpleTimeBlockService.getCalendarEventById(id);
-    }
+  /**
+   * Retrieve a time-blocked event
+   *
+   * @param id
+   * @return calendar event associated to the id parameter
+   */
+  @GetMapping("/{id}")
+  public CalendarEvent getCalendarEventById(@PathVariable("id") Integer id) {
+    log.info("Received request to retrieve calendar event with id {}", id);
+    return simpleTimeBlockService.getCalendarEventById(id);
+  }
+
+  /**
+   * Retrieve a collection of time-blocked events. If the date parameter is not present, this
+   * endpoint will retrieve all calendar events on the back end database. If the date parameter is
+   * present, this endpoint will retrieve all calendar events matching the date parameter.
+   *
+   * @param date
+   * @return collection of calendar events
+   */
+  @GetMapping
+  public List<CalendarEvent> getCalendarEvents(
+      @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+          LocalDate date) {
+    return date == null
+        ? simpleTimeBlockService.getAllCalendarEvents()
+        : simpleTimeBlockService.getCalendarEventsOnDay(date);
+  }
 }
