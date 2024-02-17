@@ -1,5 +1,6 @@
 package com.narlock.simpletimeblock.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,11 +13,21 @@ import java.time.LocalTime;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "CalendarEvent")
 public class CalendarEvent {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
     private String note;
+
+    @Column(name = "start_time")
     private LocalTime startTime;
+
+    @Column(name = "end_time")
     private LocalTime endTime;
     private LocalDate date;
     private String meta;

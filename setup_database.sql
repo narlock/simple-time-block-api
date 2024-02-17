@@ -1,6 +1,6 @@
 # USE <your_database_name>
 
-CREATE TABLE CalendarEntry(
+CREATE TABLE CalendarEvent(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(250),
     note VARCHAR(250),

@@ -10,3 +10,8 @@ spring:
     username: ${lmysql.username}
     password: ${lmysql.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        # Modifying this physical strategy allows us to use the correct name of the table "CalendarEvent"
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
