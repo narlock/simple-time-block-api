@@ -1,5 +1,7 @@
-package com.narlock.simpletimeblock.exception;
+package com.narlock.simpletimeblock.controller;
 
+import com.narlock.simpletimeblock.exception.CalendarEventNotFoundException;
+import com.narlock.simpletimeblock.exception.NoCalendarEventOnDayException;
 import com.narlock.simpletimeblock.exception.response.ErrorResponse;
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;

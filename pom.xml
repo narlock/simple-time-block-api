@@ -117,6 +117,15 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.8</version> <!-- Use the latest version -->
+
+				<configuration>
+					<excludes>
+						<!-- Specify the packages you want to exclude -->
+						<exclude>com/narlock/simpletimeblock/exception/**</exclude>
+						<exclude>com/narlock/simpletimeblock/model/**</exclude>
+					</excludes>
+				</configuration>
+
 				<executions>
 					<execution>
 						<goals>
