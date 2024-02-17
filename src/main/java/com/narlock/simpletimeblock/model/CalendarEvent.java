@@ -11,8 +11,6 @@ import java.time.LocalTime;
 
 @Data
 @RequiredArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "CalendarEvent")
 public class CalendarEvent {

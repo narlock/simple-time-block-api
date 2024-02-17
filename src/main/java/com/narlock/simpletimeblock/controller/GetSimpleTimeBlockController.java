@@ -9,16 +9,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/time-block")
 @RequiredArgsConstructor
-public class SimpleTimeBlockController {
+public class GetSimpleTimeBlockController {
 
     private final SimpleTimeBlockService simpleTimeBlockService;
 
+    /**
+     * Retrieve a time-blocked event
+     * @param id
+     * @return CalenarEvent associated to the id parameter
+     */
     @GetMapping("/{id}")
     public CalendarEvent getCalendarEventById(@PathVariable("id") Integer id) {
         log.info("Received request to retrieve calendar event with id {}", id);
