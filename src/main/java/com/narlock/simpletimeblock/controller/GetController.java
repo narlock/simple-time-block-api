@@ -9,11 +9,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * This is the GET controller, responsible for the GET operations on the REST API
+ *
+ * @author narlock
+ * @version 1.0.0
+ * @since 2024-02-17
+ */
 @Slf4j
 @RestController
 @RequestMapping("/time-block")
 @RequiredArgsConstructor
-public class GetSimpleTimeBlockController {
+public class GetController {
 
   private final SimpleTimeBlockService simpleTimeBlockService;
 

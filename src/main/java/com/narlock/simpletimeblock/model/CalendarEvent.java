@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "CalendarEvent")
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CalendarEvent {
 
   @Id
@@ -29,4 +28,19 @@ public class CalendarEvent {
 
   private LocalDate date;
   private String meta;
+
+  public CalendarEvent(
+      String name,
+      String note,
+      LocalTime startTime,
+      LocalTime endTime,
+      LocalDate date,
+      String meta) {
+    this.name = name;
+    this.note = note;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.date = date;
+    this.meta = meta;
+  }
 }

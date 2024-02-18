@@ -5,6 +5,7 @@ import com.narlock.simpletimeblock.exception.NoCalendarEventOnDayException;
 import com.narlock.simpletimeblock.exception.response.ErrorResponse;
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -32,6 +33,28 @@ public class GlobalExceptionHandler {
             .timestamp(LocalDateTime.now().toString())
             .build(),
         HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  public ResponseEntity<ErrorResponse> dataIntegrityViolationExceptionHandler(final DataIntegrityViolationException e) {
+    log.error("DataIntegrityViolationException caught in controller advice: {}", e.getMessage());
+    if(e.getRootCause() != null) {
+      return createErrorResponse(
+              ErrorResponse.builder()
+                      .status(BAD_REQUEST_STATUS)
+                      .message(e.getRootCause().getMessage())
+                      .timestamp(LocalDateTime.now().toString())
+                      .build(),
+              HttpStatus.BAD_REQUEST);
+    } else {
+      return createErrorResponse(
+              ErrorResponse.builder()
+                      .status(BAD_REQUEST_STATUS)
+                      .message("An unexpected request was received, please check your request body")
+                      .timestamp(LocalDateTime.now().toString())
+                      .build(),
+              HttpStatus.BAD_REQUEST);
+    }
   }
 
   @ExceptionHandler(CalendarEventNotFoundException.class)
