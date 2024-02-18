@@ -1,5 +1,7 @@
 package com.narlock.simpletimeblock.service;
 
+import static com.narlock.simpletimeblock.util.RecurringEventParser.*;
+
 import com.narlock.simpletimeblock.exception.CalendarEventNotFoundException;
 import com.narlock.simpletimeblock.exception.NoCalendarEventOnDayException;
 import com.narlock.simpletimeblock.model.CalendarEvent;
@@ -7,7 +9,6 @@ import com.narlock.simpletimeblock.model.request.CreateCalendarEventRequest;
 import com.narlock.simpletimeblock.model.request.CreateRecurringCalendarEventsRequest;
 import com.narlock.simpletimeblock.model.response.RecurringCalendarEventsResponse;
 import com.narlock.simpletimeblock.repository.CalendarEventRepository;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,8 +17,6 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import static com.narlock.simpletimeblock.util.RecurringEventParser.*;
 
 @Slf4j
 @Service
@@ -81,6 +80,7 @@ public class SimpleTimeBlockService {
 
   /**
    * Creates a calendar event
+   *
    * @param request
    * @return the created calendar event
    */
@@ -94,7 +94,8 @@ public class SimpleTimeBlockService {
    * @param request
    * @return response containing amount of events created
    */
-  public RecurringCalendarEventsResponse createRecurringCalendarEvents(CreateRecurringCalendarEventsRequest request) {
+  public RecurringCalendarEventsResponse createRecurringCalendarEvents(
+      CreateRecurringCalendarEventsRequest request) {
     List<CreateCalendarEventRequest> eventsToCreate = new ArrayList<>();
 
     // Parse repeat and determine the days to repeat
@@ -118,6 +119,7 @@ public class SimpleTimeBlockService {
     }
 
     // Return response with the amount of events created
-    return new RecurringCalendarEventsResponse(eventsToCreate.size(), request.getEvent().getDate(), endDate, request.getRepeat());
+    return new RecurringCalendarEventsResponse(
+        eventsToCreate.size(), request.getEvent().getDate(), endDate, request.getRepeat());
   }
 }

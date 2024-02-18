@@ -1,10 +1,8 @@
 package com.narlock.simpletimeblock.model.request;
 
+import com.narlock.simpletimeblock.model.CalendarEvent;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import javax.validation.constraints.NotBlank;
-
-import com.narlock.simpletimeblock.model.CalendarEvent;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

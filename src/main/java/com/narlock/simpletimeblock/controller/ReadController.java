@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/time-block")
 @RequiredArgsConstructor
-public class GetController {
+public class ReadController {
 
   private final SimpleTimeBlockService simpleTimeBlockService;
 

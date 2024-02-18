@@ -1,6 +1,5 @@
 package com.narlock.simpletimeblock.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class CreateRecurringCalendarEventsRequest {
-    public String repeat;
-    public String until;
-    public CreateCalendarEventRequest event;
+  public String repeat;
+  public String until;
+  public CreateCalendarEventRequest event;
 }

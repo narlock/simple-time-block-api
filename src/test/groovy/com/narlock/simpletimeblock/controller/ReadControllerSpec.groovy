@@ -24,7 +24,7 @@ import static com.narlock.simpletimeblock.util.TestUtil.*
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class GetSimpleTimeBlockControllerSpec extends Specification {
+class ReadControllerSpec extends Specification {
     @Autowired
     MockMvc mockMvc
 

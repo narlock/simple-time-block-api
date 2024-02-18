@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/time-block")
 @RequiredArgsConstructor
-public class PostController {
+public class CreateController {
 
   private final SimpleTimeBlockService simpleTimeBlockService;
 
@@ -33,7 +33,8 @@ public class PostController {
 
   @PostMapping("/recurring")
   @ResponseStatus(HttpStatus.CREATED)
-  public RecurringCalendarEventsResponse createRecurringCalendarEvents(@RequestBody CreateRecurringCalendarEventsRequest request) {
-     return simpleTimeBlockService.createRecurringCalendarEvents(request);
+  public RecurringCalendarEventsResponse createRecurringCalendarEvents(
+      @RequestBody CreateRecurringCalendarEventsRequest request) {
+    return simpleTimeBlockService.createRecurringCalendarEvents(request);
   }
 }
