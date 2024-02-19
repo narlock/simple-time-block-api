@@ -5,7 +5,7 @@ import static com.narlock.simpletimeblock.util.RecurringEventParser.*;
 import com.narlock.simpletimeblock.exception.CalendarEventNotFoundException;
 import com.narlock.simpletimeblock.exception.NoCalendarEventOnDayException;
 import com.narlock.simpletimeblock.model.CalendarEvent;
-import com.narlock.simpletimeblock.model.request.CreateCalendarEventRequest;
+import com.narlock.simpletimeblock.model.request.CalendarEventRequest;
 import com.narlock.simpletimeblock.model.request.CreateRecurringCalendarEventsRequest;
 import com.narlock.simpletimeblock.model.response.RecurringCalendarEventsResponse;
 import com.narlock.simpletimeblock.repository.CalendarEventRepository;
@@ -84,7 +84,7 @@ public class SimpleTimeBlockService {
    * @param request
    * @return the created calendar event
    */
-  public CalendarEvent createCalendarEvent(CreateCalendarEventRequest request) {
+  public CalendarEvent createCalendarEvent(CalendarEventRequest request) {
     return calendarEventRepository.save(request.toCalendarEvent());
   }
 
@@ -96,7 +96,7 @@ public class SimpleTimeBlockService {
    */
   public RecurringCalendarEventsResponse createRecurringCalendarEvents(
       CreateRecurringCalendarEventsRequest request) {
-    List<CreateCalendarEventRequest> eventsToCreate = new ArrayList<>();
+    List<CalendarEventRequest> eventsToCreate = new ArrayList<>();
 
     // Parse repeat and determine the days to repeat
     List<DayOfWeek> repeatDays = parseRepeatDays(request.getRepeat());
@@ -114,12 +114,34 @@ public class SimpleTimeBlockService {
     }
 
     // Save events to the repository
-    for (CreateCalendarEventRequest eventRequest : eventsToCreate) {
+    for (CalendarEventRequest eventRequest : eventsToCreate) {
       calendarEventRepository.save(eventRequest.toCalendarEvent());
     }
 
     // Return response with the amount of events created
     return new RecurringCalendarEventsResponse(
         eventsToCreate.size(), request.getEvent().getDate(), endDate, request.getRepeat());
+  }
+
+  /**
+   * Update fields on a calendar event
+   * @param id
+   * @param request
+   * @return The calendar event that was updated
+   */
+  public CalendarEvent updateFieldsOnCalendarEvent(Integer id, CalendarEventRequest request) {
+    // Create CalendarEvent object from parameters
+    CalendarEvent calendarEventToUpdate = new CalendarEvent();
+
+    // Update fields from CalendarEventRequest if not null
+    Optional.ofNullable(request.getName()).ifPresent(calendarEventToUpdate::setName);
+    Optional.ofNullable(request.getNote()).ifPresent(calendarEventToUpdate::setNote);
+    Optional.ofNullable(request.getStartTime()).ifPresent(calendarEventToUpdate::setStartTime);
+    Optional.ofNullable(request.getEndTime()).ifPresent(calendarEventToUpdate::setEndTime);
+    Optional.ofNullable(request.getDate()).ifPresent(calendarEventToUpdate::setDate);
+    Optional.ofNullable(request.getMeta()).ifPresent(calendarEventToUpdate::setMeta);
+
+    // Update the existing CalendarEvent
+    return calendarEventRepository.saveAndFlush(calendarEventToUpdate);
   }
 }

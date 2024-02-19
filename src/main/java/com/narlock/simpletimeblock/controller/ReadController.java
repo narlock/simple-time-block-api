@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * This is the GET controller, responsible for the GET operations on the REST API
+ * This is the READ controller, responsible for the GET operations on the REST API
  *
  * @author narlock
  * @version 1.0.0

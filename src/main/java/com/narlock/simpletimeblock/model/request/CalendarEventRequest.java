@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class CreateCalendarEventRequest {
+public class CalendarEventRequest {
   private String name;
   private String note;
   private LocalTime startTime;

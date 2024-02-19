@@ -1,6 +1,6 @@
 package com.narlock.simpletimeblock.util;
 
-import com.narlock.simpletimeblock.model.request.CreateCalendarEventRequest;
+import com.narlock.simpletimeblock.model.request.CalendarEventRequest;
 import com.narlock.simpletimeblock.model.request.CreateRecurringCalendarEventsRequest;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -65,9 +65,9 @@ public class RecurringEventParser {
     }
   }
 
-  public static CreateCalendarEventRequest createEventFromRequest(
+  public static CalendarEventRequest createEventFromRequest(
       CreateRecurringCalendarEventsRequest request, LocalDate date) {
-    CreateCalendarEventRequest eventRequest = new CreateCalendarEventRequest();
+    CalendarEventRequest eventRequest = new CalendarEventRequest();
     eventRequest.setName(request.getEvent().getName());
     eventRequest.setNote(request.getEvent().getNote());
     eventRequest.setStartTime(request.getEvent().getStartTime());

@@ -1,7 +1,7 @@
 package com.narlock.simpletimeblock.controller;
 
 import com.narlock.simpletimeblock.model.CalendarEvent;
-import com.narlock.simpletimeblock.model.request.CreateCalendarEventRequest;
+import com.narlock.simpletimeblock.model.request.CalendarEventRequest;
 import com.narlock.simpletimeblock.model.request.CreateRecurringCalendarEventsRequest;
 import com.narlock.simpletimeblock.model.response.RecurringCalendarEventsResponse;
 import com.narlock.simpletimeblock.service.SimpleTimeBlockService;
@@ -27,7 +27,7 @@ public class CreateController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public CalendarEvent createCalendarEvent(@RequestBody CreateCalendarEventRequest request) {
+  public CalendarEvent createCalendarEvent(@RequestBody CalendarEventRequest request) {
     return simpleTimeBlockService.createCalendarEvent(request);
   }
 

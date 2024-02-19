@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class CreateRecurringCalendarEventsRequest {
   public String repeat;
   public String until;
-  public CreateCalendarEventRequest event;
+  public CalendarEventRequest event;
 }

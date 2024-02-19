@@ -135,11 +135,10 @@ The user can perform a full update on a time-blocked event. This means that ever
 overwrite.
 
 ```json
-PUT /time-block
+PUT /time-block/{id}
 Content-Type: application/json
 
 {
-   "id": 1,
    "name": "Yearly Eye Exam",
    "note": "123 John Doe Drive, Gotham City",
    "startTime": "16:00:00",
@@ -169,11 +168,10 @@ The user can overwrite specific fields of an existing time-blocked event. The pa
 the request payload will be updated for the given event id.
 
 ```json
-PATCH /time-block
+PATCH /time-block/{id}
 Content-Type: application/json
 
 {
-   "id": 1,
    "name": "Yearly Eye Exam",
    "note": "123 John Doe Drive, Gotham City",
    "startTime": "16:00:00",
