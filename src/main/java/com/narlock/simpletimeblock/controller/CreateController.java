@@ -25,12 +25,25 @@ public class CreateController {
 
   private final SimpleTimeBlockService simpleTimeBlockService;
 
+  /**
+   * Creates a single calendar event based on the request payload
+   *
+   * @param request
+   * @return the created calendar event
+   */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public CalendarEvent createCalendarEvent(@RequestBody CalendarEventRequest request) {
     return simpleTimeBlockService.createCalendarEvent(request);
   }
 
+  /**
+   * Create a set of recurring calendar events. This endpoint can be used for setting up the same
+   * event to have it occur on different days
+   *
+   * @param request
+   * @return
+   */
   @PostMapping("/recurring")
   @ResponseStatus(HttpStatus.CREATED)
   public RecurringCalendarEventsResponse createRecurringCalendarEvents(

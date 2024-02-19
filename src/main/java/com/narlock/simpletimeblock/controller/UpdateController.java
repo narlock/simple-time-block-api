@@ -17,14 +17,37 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/time-block")
+@RequestMapping("/time-block/{id}")
 @RequiredArgsConstructor
 public class UpdateController {
-    private final SimpleTimeBlockService simpleTimeBlockService;
+  private final SimpleTimeBlockService simpleTimeBlockService;
 
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public CalendarEvent updateFieldsOnCalendarEvent(@PathVariable("id") Integer id, @RequestBody CalendarEventRequest request) {
-        return simpleTimeBlockService.updateFieldsOnCalendarEvent(id, request);
-    }
+  /**
+   * Partial update for a calendar event. With this endpoint, the user can update any fields on the
+   * calendar event
+   *
+   * @param id
+   * @param request
+   * @return the updated calendar event
+   */
+  @PatchMapping
+  @ResponseStatus(HttpStatus.OK)
+  public CalendarEvent updateFieldsOnCalendarEvent(
+      @PathVariable("id") Integer id, @RequestBody CalendarEventRequest request) {
+    return simpleTimeBlockService.updateFieldsOnCalendarEvent(id, request);
+  }
+
+  /**
+   * Overwrite an existing calendar event. This is a full update.
+   *
+   * @param id
+   * @param request
+   * @return the overwritten calendar event
+   */
+  @PutMapping
+  @ResponseStatus(HttpStatus.OK)
+  public CalendarEvent overwriteCalendarEvent(
+      @PathVariable("id") Integer id, @RequestBody CalendarEventRequest request) {
+    return simpleTimeBlockService.overwriteCalendarEvent(id, request);
+  }
 }

@@ -124,24 +124,64 @@ public class SimpleTimeBlockService {
   }
 
   /**
-   * Update fields on a calendar event
+   * Partial update fields on a calendar event
+   *
    * @param id
    * @param request
    * @return The calendar event that was updated
    */
   public CalendarEvent updateFieldsOnCalendarEvent(Integer id, CalendarEventRequest request) {
-    // Create CalendarEvent object from parameters
-    CalendarEvent calendarEventToUpdate = new CalendarEvent();
+    // Retrieve current CalendarEvent
+    CalendarEvent currentCalendarEvent = getCalendarEventById(id);
 
-    // Update fields from CalendarEventRequest if not null
-    Optional.ofNullable(request.getName()).ifPresent(calendarEventToUpdate::setName);
-    Optional.ofNullable(request.getNote()).ifPresent(calendarEventToUpdate::setNote);
-    Optional.ofNullable(request.getStartTime()).ifPresent(calendarEventToUpdate::setStartTime);
-    Optional.ofNullable(request.getEndTime()).ifPresent(calendarEventToUpdate::setEndTime);
-    Optional.ofNullable(request.getDate()).ifPresent(calendarEventToUpdate::setDate);
-    Optional.ofNullable(request.getMeta()).ifPresent(calendarEventToUpdate::setMeta);
+    // Update fields from currentCalendarEvent if request field is not null
+    Optional.ofNullable(request.getName()).ifPresent(currentCalendarEvent::setName);
+    Optional.ofNullable(request.getNote()).ifPresent(currentCalendarEvent::setNote);
+    Optional.ofNullable(request.getStartTime()).ifPresent(currentCalendarEvent::setStartTime);
+    Optional.ofNullable(request.getEndTime()).ifPresent(currentCalendarEvent::setEndTime);
+    Optional.ofNullable(request.getDate()).ifPresent(currentCalendarEvent::setDate);
+    Optional.ofNullable(request.getMeta()).ifPresent(currentCalendarEvent::setMeta);
 
-    // Update the existing CalendarEvent
-    return calendarEventRepository.saveAndFlush(calendarEventToUpdate);
+    return calendarEventRepository.saveAndFlush(currentCalendarEvent);
+  }
+
+  /**
+   * Overwrite an existing calendar event
+   *
+   * @param id
+   * @param request
+   * @return the calendar event that was updated
+   */
+  public CalendarEvent overwriteCalendarEvent(Integer id, CalendarEventRequest request) {
+    CalendarEvent calendarEvent =
+        new CalendarEvent(
+            id,
+            request.getName(),
+            request.getNote(),
+            request.getStartTime(),
+            request.getEndTime(),
+            request.getDate(),
+            request.getMeta());
+    return calendarEventRepository.saveAndFlush(calendarEvent);
+  }
+
+  /**
+   * Delete a calendar event by its id
+   *
+   * @param id
+   */
+  public void deleteCalendarEventById(Integer id) {
+    calendarEventRepository.deleteById(id);
+    log.info("Successfully deleted calendar event with id {}", id);
+  }
+
+  /**
+   * Delete a calendar event by its date
+   *
+   * @param date
+   */
+  public void deleteCalendarEventByDate(LocalDate date) {
+    calendarEventRepository.deleteByDate(date);
+    log.info("Successfully deleted calendar event with date {}", date);
   }
 }
