@@ -1,5 +1,6 @@
 package com.narlock.simpletimeblock.model.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Data
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class CreateRecurringCalendarEventsRequest {
   public String repeat;
   public String until;

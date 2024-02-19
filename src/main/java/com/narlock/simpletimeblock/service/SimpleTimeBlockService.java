@@ -9,7 +9,6 @@ import com.narlock.simpletimeblock.model.request.CalendarEventRequest;
 import com.narlock.simpletimeblock.model.request.CreateRecurringCalendarEventsRequest;
 import com.narlock.simpletimeblock.model.response.RecurringCalendarEventsResponse;
 import com.narlock.simpletimeblock.repository.CalendarEventRepository;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,18 +98,16 @@ public class SimpleTimeBlockService {
     List<CalendarEventRequest> eventsToCreate = new ArrayList<>();
 
     // Parse repeat and determine the days to repeat
-    List<DayOfWeek> repeatDays = parseRepeatDays(request.getRepeat());
+    int repeatDays = parseRepeatDays(request.getRepeat());
 
     // Calculate the end date based on the until field
-    LocalDate endDate = calculateEndDate(request.getUntil());
+    LocalDate endDate = calculateEndDate(request.getEvent().getDate(), request.getUntil());
 
     // Generate recurring events
     LocalDate currentDate = request.getEvent().getDate();
     while (currentDate.isBefore(endDate) || currentDate.isEqual(endDate)) {
-      if (repeatDays.isEmpty() || repeatDays.contains(currentDate.getDayOfWeek())) {
-        eventsToCreate.add(createEventFromRequest(request, currentDate));
-      }
-      currentDate = currentDate.plusDays(1);
+      eventsToCreate.add(createEventFromRequest(request, currentDate));
+      currentDate = currentDate.plusDays(repeatDays);
     }
 
     // Save events to the repository

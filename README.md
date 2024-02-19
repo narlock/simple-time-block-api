@@ -87,14 +87,6 @@ HTTP/1.1 201 Created
 Users can create a recurring time-blocked event based on a set of criteria.
 - **Repeat**: When will this event reoccur?
   - `DAILY`, `WEEKLY`, or `MONTHLY`
-  - OR a combination of the below. Example: `MWF` for repeating on occurring Monday, Wednesday, and Friday.
-    - `M` (Monday)
-    - `T` (Tuesday)
-    - `W` (Wednesday)
-    - `H` (Thursday)
-    - `F` (Friday)
-    - `S` (Saturday)
-    - `U` (Sunday)
 - **Until**: How long events will be created after the start date.
   - `WEEK`, create events only up to the next seven days
   - `MONTH`, create events only up to the next 31 days
