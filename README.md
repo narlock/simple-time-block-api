@@ -18,7 +18,6 @@ This section assumes that the user of this software has the knowledge of install
 Java applications. It also assumes that the user knows how to install and configure a MySQL database server.
 - **MySQL**: With MySQL running, configure and run the `setup_database.sql` script to create the **narlock-tb** database.
 - **Run the application**
-  - Using **Docker**: In a terminal, run `docker-compose up -d` to run the application.
   - Using **Java 17**: After building the application, navigate to the directory of the jar in a terminal and 
   use `java -jar simple-time-block-api.jar` to run the application.
   - Using **Maven**: In a terminal, use `mvn spring-boot:run` to run the application.
@@ -274,4 +273,5 @@ HTTP/1.1 200 OK
 ```
 
 ## Test Coverage
-This section will be updated when testing has been completed for the application.
+
+![Test Coverage](./readme_assets/coverage.png)
